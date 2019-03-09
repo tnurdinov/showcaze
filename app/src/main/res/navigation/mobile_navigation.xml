@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            app:startDestination="@id/content_dest"
+            android:id="@+id/mobile_navigation">
+
+    <fragment
+            android:id="@+id/content_dest"
+            android:name="com.tnurdinov.showcaze.ui.ContentFragment"
+            android:label="Content"
+            tools:layout="@layout/fragment_content">
+        <action
+                android:id="@+id/next_action"
+                app:destination="@id/list_dest">
+        </action>
+    </fragment>
+
+    <fragment
+            android:id="@+id/list_dest"
+            android:name="com.tnurdinov.showcaze.ui.ListFragment"
+            tools:layout="@layout/fragment_list">
+
+    </fragment>
+
+</navigation>
