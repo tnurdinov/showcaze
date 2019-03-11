@@ -12,15 +12,27 @@ class ImageContentAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup,
                                     viewType: Int): RecyclerView.ViewHolder {
-        val textView = LayoutInflater.from(parent.context)
-            .inflate(R.layout.single_image_widget, parent, false) as ConstraintLayout
 
         return when(viewType) {
             SINGLE_IMAGE_WIDGET -> {
-                ImageWidgetViewHolder(textView)
+                val constraintLayout = LayoutInflater.from(parent.context)
+                    .inflate(R.layout.single_image_widget, parent, false) as ConstraintLayout
+                SingleImageWidgetViewHolder(constraintLayout)
+            }
+            DOUBLE_IMAGE_WIDGET -> {
+                val constraintLayout = LayoutInflater.from(parent.context)
+                    .inflate(R.layout.double_image_widget, parent, false) as ConstraintLayout
+                DoubleImageWidgetViewHolder(constraintLayout)
+            }
+            TRIPLE_IMAGE_WIDGET -> {
+                val constraintLayout = LayoutInflater.from(parent.context)
+                    .inflate(R.layout.triple_image_widget, parent, false) as ConstraintLayout
+                TripleImageWidgetViewHolder(constraintLayout)
             }
             else -> {
-                SampleViewHolder(textView)
+                val constraintLayout2 = LayoutInflater.from(parent.context)
+                    .inflate(R.layout.single_image_widget, parent, false) as ConstraintLayout
+                SampleViewHolder(constraintLayout2)
             }
         }
 
@@ -30,7 +42,15 @@ class ImageContentAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
         when(holder.itemViewType) {
             SINGLE_IMAGE_WIDGET -> {
-                val imageViewHolder = holder as ImageWidgetViewHolder
+                val imageViewHolder = holder as SingleImageWidgetViewHolder
+                imageViewHolder.bind(contentDataset[position])
+            }
+            DOUBLE_IMAGE_WIDGET -> {
+                val imageViewHolder = holder as DoubleImageWidgetViewHolder
+                imageViewHolder.bind(contentDataset[position])
+            }
+            TRIPLE_IMAGE_WIDGET -> {
+                val imageViewHolder = holder as TripleImageWidgetViewHolder
                 imageViewHolder.bind(contentDataset[position])
             }
             else -> {
