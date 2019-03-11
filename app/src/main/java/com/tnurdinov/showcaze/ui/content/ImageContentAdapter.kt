@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 import com.tnurdinov.showcaze.R
 import com.tnurdinov.showcaze.pojos.Content
 
@@ -29,6 +30,11 @@ class ImageContentAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                     .inflate(R.layout.triple_image_widget, parent, false) as ConstraintLayout
                 TripleImageWidgetViewHolder(constraintLayout)
             }
+            SLIDER_WIDGET -> {
+                val viewPager = LayoutInflater.from(parent.context)
+                    .inflate(R.layout.slider_widget, parent, false) as ViewPager2
+                SliderWidgetViewHolder(viewPager)
+            }
             else -> {
                 val constraintLayout2 = LayoutInflater.from(parent.context)
                     .inflate(R.layout.single_image_widget, parent, false) as ConstraintLayout
@@ -51,6 +57,10 @@ class ImageContentAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             }
             TRIPLE_IMAGE_WIDGET -> {
                 val imageViewHolder = holder as TripleImageWidgetViewHolder
+                imageViewHolder.bind(contentDataset[position])
+            }
+            SLIDER_WIDGET -> {
+                val imageViewHolder = holder as SliderWidgetViewHolder
                 imageViewHolder.bind(contentDataset[position])
             }
             else -> {
