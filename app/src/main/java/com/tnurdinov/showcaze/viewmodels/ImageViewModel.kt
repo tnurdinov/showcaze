@@ -11,11 +11,12 @@ import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
 class ImageViewModel: ViewModel(), CoroutineScope {
-    private val job = Job()
+    private val job = SupervisorJob()
     override val coroutineContext: CoroutineContext
         get() = job + Dispatchers.Main
 
     private val randomMovie: MutableLiveData<List<Content>> = MutableLiveData()
+    private val imageList: MutableLiveData<List<Image>> = MutableLiveData()
     private val errorMessage: MutableLiveData<String> = MutableLiveData()
 
     private val repository by lazy {
@@ -38,8 +39,22 @@ class ImageViewModel: ViewModel(), CoroutineScope {
         }
     }
 
+    fun getImageList() = launch {
+        val result = withContext(Dispatchers.IO) {
+            repository.getImageList()
+        }
+        when (result) {
+            is ScreenState.Data -> imageList.postValue(result.someData as List<Image>?)
+            is ScreenState.Error -> errorMessage.postValue("Some message")
+        }
+    }
+
     fun observeMovieDetails(): LiveData<List<Content>> {
         return randomMovie
+    }
+
+    fun observeImageList(): LiveData<List<Image>> {
+        return imageList
     }
 
     override fun onCleared() {

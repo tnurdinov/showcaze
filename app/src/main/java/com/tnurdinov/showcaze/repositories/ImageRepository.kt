@@ -29,4 +29,13 @@ class ImageRepository {
             emptyList()
         }
     }
+
+    suspend fun getImageList(): ScreenState {
+        return try {
+            val list = imageService.getList().await()
+            ScreenState.Data(list.images)
+        } catch (exception: Exception) {
+            ScreenState.Error
+        }
+    }
 }

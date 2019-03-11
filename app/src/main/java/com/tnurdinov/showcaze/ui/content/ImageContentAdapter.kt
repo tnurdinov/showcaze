@@ -8,7 +8,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.tnurdinov.showcaze.R
 import com.tnurdinov.showcaze.pojos.Content
 
-class ImageContentAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ImageContentAdapter(private val listener: OnItemClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     var contentDataset: List<Content> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup,
@@ -76,6 +76,10 @@ class ImageContentAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 val sampleViewHolder = holder as SampleViewHolder
                 sampleViewHolder.bind(contentDataset[position])
             }
+        }
+
+        holder.itemView.setOnClickListener {
+            listener.onItemClick()
         }
     }
 
