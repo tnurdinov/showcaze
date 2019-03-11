@@ -35,6 +35,11 @@ class ImageContentAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                     .inflate(R.layout.slider_widget, parent, false) as ViewPager2
                 SliderWidgetViewHolder(viewPager)
             }
+            CAROUSEL_WIDGET -> {
+                val recyclerView = LayoutInflater.from(parent.context)
+                    .inflate(R.layout.carousel_widget, parent, false) as RecyclerView
+                CarouselImageWidgetViewHolder(recyclerView)
+            }
             else -> {
                 val constraintLayout2 = LayoutInflater.from(parent.context)
                     .inflate(R.layout.single_image_widget, parent, false) as ConstraintLayout
@@ -61,6 +66,10 @@ class ImageContentAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             }
             SLIDER_WIDGET -> {
                 val imageViewHolder = holder as SliderWidgetViewHolder
+                imageViewHolder.bind(contentDataset[position])
+            }
+            CAROUSEL_WIDGET -> {
+                val imageViewHolder = holder as CarouselImageWidgetViewHolder
                 imageViewHolder.bind(contentDataset[position])
             }
             else -> {

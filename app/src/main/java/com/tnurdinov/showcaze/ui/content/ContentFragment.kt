@@ -59,6 +59,12 @@ class ContentFragment : Fragment() {
 
     private fun observeMovieDetail() {
         val observer = Observer<List<Content>> { contents ->
+            for (content in contents) {
+                content.url?.let {
+                    val fromUrl = viewModel.getFronUrl(it)
+                    content.images = fromUrl
+                }
+            }
             viewAdapter.setContent(contents)
             viewAdapter.notifyDataSetChanged()
         }

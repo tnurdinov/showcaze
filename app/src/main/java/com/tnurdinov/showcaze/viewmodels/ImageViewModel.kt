@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.tnurdinov.showcaze.ScreenState
 import com.tnurdinov.showcaze.pojos.Content
+import com.tnurdinov.showcaze.pojos.Image
 import com.tnurdinov.showcaze.repositories.ImageRepository
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
@@ -26,8 +27,14 @@ class ImageViewModel: ViewModel(), CoroutineScope {
             repository.getContent()
         }
         when (result) {
-            is ScreenState.Data -> randomMovie.postValue(result.someData)
+            is ScreenState.Data -> randomMovie.postValue(result.someData as List<Content>?)
             is ScreenState.Error -> errorMessage.postValue("Some message")
+        }
+    }
+
+    fun getFronUrl(url: String) = runBlocking {
+        return@runBlocking withContext(Dispatchers.IO) {
+            repository.getListFromUrl(url)
         }
     }
 
