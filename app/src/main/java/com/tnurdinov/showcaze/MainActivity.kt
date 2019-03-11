@@ -30,14 +30,5 @@ class MainActivity : AppCompatActivity() {
 
         appBarConfiguration = AppBarConfiguration(navController.graph)
 
-        viewModel.getContent()
-        observeMovieDetail()
-    }
-
-    private fun observeMovieDetail() {
-        val observer = Observer<List<Content>> { content ->
-            Log.d("TAG", content.get(0).type)
-        }
-        viewModel.observeMovieDetails().observe(this, observer)
     }
 }

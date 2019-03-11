@@ -1,4 +1,4 @@
-package com.tnurdinov.showcaze.ui
+package com.tnurdinov.showcaze.ui.list
 
 
 import android.os.Bundle

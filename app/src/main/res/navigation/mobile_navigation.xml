@@ -7,7 +7,7 @@
 
     <fragment
             android:id="@+id/content_dest"
-            android:name="com.tnurdinov.showcaze.ui.ContentFragment"
+            android:name="com.tnurdinov.showcaze.ui.content.ContentFragment"
             android:label="Content"
             tools:layout="@layout/fragment_content">
         <action
@@ -18,7 +18,7 @@
 
     <fragment
             android:id="@+id/list_dest"
-            android:name="com.tnurdinov.showcaze.ui.ListFragment"
+            android:name="com.tnurdinov.showcaze.ui.list.ListFragment"
             tools:layout="@layout/fragment_list">
 
     </fragment>
