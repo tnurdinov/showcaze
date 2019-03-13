@@ -5,25 +5,29 @@ import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.tnurdinov.showcaze.pojos.Content
 
+class CarouselImageWidgetViewHolder(recyclerView: RecyclerView) : RecyclerView.ViewHolder(recyclerView) {
+    private var viewAdapter: CarouselAdapter
+    private var viewManager: RecyclerView.LayoutManager
 
-class CarouselImageWidgetViewHolder(private val recyclerView: RecyclerView) : RecyclerView.ViewHolder(recyclerView) {
-    private lateinit var viewAdapter: CarouselAdapter
-    private lateinit var viewManager: RecyclerView.LayoutManager
-
-    fun bind(content: Content) {
-        viewManager = CenterZoomLayoutManager(itemView.context, LinearLayoutManager.HORIZONTAL, false)
-        viewAdapter = CarouselAdapter(content.images!!)
-
+    init {
         val snapHelper = LinearSnapHelper()
         snapHelper.attachToRecyclerView(recyclerView)
+
+        viewManager = CenterZoomLayoutManager(itemView.context, LinearLayoutManager.HORIZONTAL, false)
+        viewAdapter = CarouselAdapter()
 
         recyclerView.apply {
             setHasFixedSize(true)
             layoutManager = viewManager
             adapter = viewAdapter
         }
-
-        viewAdapter.notifyDataSetChanged()
     }
 
+    fun bind(content: Content) {
+        content.images?.let { imgList ->
+            viewAdapter.images.clear()
+            viewAdapter.images.addAll(imgList)
+            viewAdapter.notifyDataSetChanged()
+        }
+    }
 }

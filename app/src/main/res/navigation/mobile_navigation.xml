@@ -19,6 +19,7 @@
     <fragment
             android:id="@+id/list_dest"
             android:name="com.tnurdinov.showcaze.ui.list.ListFragment"
+            android:label="List"
             tools:layout="@layout/fragment_list">
 
     </fragment>
