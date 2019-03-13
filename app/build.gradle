@@ -57,6 +57,9 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation "androidx.viewpager2:viewpager2:1.0.0-alpha01"
 
+    //Leakcanary
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.3'
+
     testImplementation "junit:junit:$junit_version"
     androidTestImplementation "androidx.test:runner:$runner_version"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
