@@ -1,9 +1,10 @@
-package com.tnurdinov.showcaze.ui.content
+package com.tnurdinov.showcaze.ui.content.carousel
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.tnurdinov.showcaze.pojos.Content
+import com.tnurdinov.showcaze.ui.content.OnItemClickListener
 
 class CarouselImageWidgetViewHolder(
     recyclerView: RecyclerView,
@@ -16,7 +17,11 @@ class CarouselImageWidgetViewHolder(
         val snapHelper = LinearSnapHelper()
         snapHelper.attachToRecyclerView(recyclerView)
 
-        viewManager = CenterZoomLayoutManager(itemView.context, LinearLayoutManager.HORIZONTAL, false)
+        viewManager = CenterZoomLayoutManager(
+            itemView.context,
+            LinearLayoutManager.HORIZONTAL,
+            false
+        )
         viewAdapter = CarouselAdapter(listener = listener)
 
         recyclerView.apply {

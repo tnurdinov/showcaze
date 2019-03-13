@@ -7,6 +7,11 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.tnurdinov.showcaze.R
 import com.tnurdinov.showcaze.pojos.Content
+import com.tnurdinov.showcaze.ui.content.carousel.CarouselImageWidgetViewHolder
+import com.tnurdinov.showcaze.ui.content.image.DoubleImageWidgetViewHolder
+import com.tnurdinov.showcaze.ui.content.image.SingleImageWidgetViewHolder
+import com.tnurdinov.showcaze.ui.content.image.TripleImageWidgetViewHolder
+import com.tnurdinov.showcaze.ui.content.slider.SliderWidgetViewHolder
 
 class ImageContentAdapter(private val listener: OnItemClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     val contentDataList = mutableListOf<Content>()
@@ -78,10 +83,6 @@ class ImageContentAdapter(private val listener: OnItemClickListener) : RecyclerV
                 sampleViewHolder.bind(contentDataList[position])
             }
         }
-
-//        holder.ite.setOnClickListener {
-//            listener.onItemClick()
-//        }
     }
 
     override fun getItemCount() = contentDataList.size

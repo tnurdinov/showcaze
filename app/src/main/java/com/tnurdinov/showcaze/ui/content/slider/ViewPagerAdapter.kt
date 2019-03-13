@@ -1,4 +1,4 @@
-package com.tnurdinov.showcaze.ui.content
+package com.tnurdinov.showcaze.ui.content.slider
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.tnurdinov.showcaze.R
 import com.tnurdinov.showcaze.pojos.Image
+import com.tnurdinov.showcaze.ui.content.OnItemClickListener
 
 class ViewPagerAdapter(
     private val images: ArrayList<Image>,
@@ -15,7 +16,13 @@ class ViewPagerAdapter(
 ) : RecyclerView.Adapter<PagerVH>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PagerVH =
-        PagerVH(LayoutInflater.from(parent.context).inflate(R.layout.item_slider_page, parent, false))
+        PagerVH(
+            LayoutInflater.from(parent.context).inflate(
+                R.layout.item_slider_page,
+                parent,
+                false
+            )
+        )
 
     override fun getItemCount(): Int = images.size
 

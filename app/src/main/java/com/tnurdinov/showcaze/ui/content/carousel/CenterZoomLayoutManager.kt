@@ -1,4 +1,4 @@
-package com.tnurdinov.showcaze.ui.content
+package com.tnurdinov.showcaze.ui.content.carousel
 
 import android.content.Context
 import androidx.recyclerview.widget.LinearLayoutManager
