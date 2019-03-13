@@ -1,6 +1,7 @@
 package com.tnurdinov.showcaze.repositories
 
 import android.net.Uri
+import com.tnurdinov.showcaze.ContentScreenState
 import com.tnurdinov.showcaze.ImageService
 import com.tnurdinov.showcaze.ScreenState
 import com.tnurdinov.showcaze.pojos.Image
@@ -11,12 +12,12 @@ class ImageRepository {
         ImageService.create()
     }
 
-    suspend fun getContent(): ScreenState {
+    suspend fun getContent(): ContentScreenState {
         return try {
             val list = imageService.getContent().await()
-            ScreenState.Data(list.content)
+            ContentScreenState.Data(list.content)
         } catch (exception: Exception) {
-            ScreenState.Error
+            ContentScreenState.Error(exception.localizedMessage)
         }
     }
 

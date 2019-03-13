@@ -4,7 +4,11 @@ package com.tnurdinov.showcaze.ui.content
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
+import android.widget.FrameLayout
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -20,6 +24,7 @@ import com.tnurdinov.showcaze.viewmodels.ImageViewModel
 
 class ContentFragment : Fragment(), OnItemClickListener {
     private lateinit var viewAdapter: ImageContentAdapter
+    private lateinit var progressView: FrameLayout
 
     private val viewModel by lazy {
         ViewModelProviders.of(this).get(ImageViewModel::class.java)
@@ -28,7 +33,9 @@ class ContentFragment : Fragment(), OnItemClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewAdapter = ImageContentAdapter(this)
-        observeMovieDetail()
+        observeContentList()
+        observeLoadingState()
+        observeErrorMessage()
     }
 
     override fun onCreateView(
@@ -44,27 +51,39 @@ class ContentFragment : Fragment(), OnItemClickListener {
             layoutManager = LinearLayoutManager(activity)
             adapter = viewAdapter
         }
+        progressView = view.findViewById(R.id.progress_view)
         return view
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
         viewModel.getContent()
     }
 
-    private fun observeMovieDetail() {
+    private fun observeContentList() {
         val observer = Observer<List<Content>> { contents ->
-            for (content in contents) {
-                content.url?.let {
-                    val fromUrl = viewModel.getFronUrl(it)
-                    content.images = fromUrl
-                }
-            }
             viewAdapter.contentDataList.clear()
             viewAdapter.contentDataList.addAll(contents)
             viewAdapter.notifyDataSetChanged()
         }
         viewModel.observeMovieDetails().observe(this, observer)
+    }
+
+    private fun observeLoadingState() {
+        val observer = Observer<Boolean> { loading ->
+            when(loading) {
+                true -> progressView.visibility = VISIBLE
+                false -> progressView.visibility = GONE
+            }
+        }
+        viewModel.observeLoadingState().observe(this, observer)
+    }
+
+    private fun observeErrorMessage() {
+        val observer = Observer<String> { msg ->
+            Toast.makeText(activity, msg, Toast.LENGTH_LONG).show()
+        }
+        viewModel.observeErrorMessage().observe(this, observer)
     }
 
     override fun onItemClick() {
