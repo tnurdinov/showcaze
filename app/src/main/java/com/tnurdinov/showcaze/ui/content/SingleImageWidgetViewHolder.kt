@@ -8,9 +8,18 @@ import com.tnurdinov.showcaze.R
 import com.tnurdinov.showcaze.pojos.Content
 
 
-class SingleImageWidgetViewHolder (viewGroup: ViewGroup) : RecyclerView.ViewHolder(viewGroup) {
+class SingleImageWidgetViewHolder (
+    viewGroup: ViewGroup,
+    listener: OnItemClickListener
+) : RecyclerView.ViewHolder(viewGroup) {
 
     var singleImageView: AppCompatImageView = itemView.findViewById(R.id.singleImageView)
+
+    init {
+        itemView.setOnClickListener {
+            listener.onItemClick()
+        }
+    }
 
     fun bind(content: Content) {
         Picasso.get().load(content.images?.first()?.url).into(singleImageView)

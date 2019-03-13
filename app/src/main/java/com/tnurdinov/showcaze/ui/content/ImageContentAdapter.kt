@@ -19,27 +19,27 @@ class ImageContentAdapter(private val listener: OnItemClickListener) : RecyclerV
             SINGLE_IMAGE_WIDGET -> {
                 val constraintLayout = inflater
                     .inflate(R.layout.single_image_widget, parent, false) as ConstraintLayout
-                SingleImageWidgetViewHolder(constraintLayout)
+                SingleImageWidgetViewHolder(constraintLayout, listener)
             }
             DOUBLE_IMAGE_WIDGET -> {
                 val constraintLayout = inflater
                     .inflate(R.layout.double_image_widget, parent, false) as ConstraintLayout
-                DoubleImageWidgetViewHolder(constraintLayout)
+                DoubleImageWidgetViewHolder(constraintLayout, listener)
             }
             TRIPLE_IMAGE_WIDGET -> {
                 val constraintLayout = inflater
                     .inflate(R.layout.triple_image_widget, parent, false) as ConstraintLayout
-                TripleImageWidgetViewHolder(constraintLayout)
+                TripleImageWidgetViewHolder(constraintLayout, listener)
             }
             SLIDER_WIDGET -> {
                 val viewPager = inflater
                     .inflate(R.layout.slider_widget, parent, false) as ViewPager2
-                SliderWidgetViewHolder(viewPager)
+                SliderWidgetViewHolder(viewPager, listener)
             }
             CAROUSEL_WIDGET -> {
                 val recyclerView = inflater
                     .inflate(R.layout.carousel_widget, parent, false) as RecyclerView
-                CarouselImageWidgetViewHolder(recyclerView)
+                CarouselImageWidgetViewHolder(recyclerView, listener)
             }
             else -> {
                 val constraintLayout2 = inflater
@@ -79,9 +79,9 @@ class ImageContentAdapter(private val listener: OnItemClickListener) : RecyclerV
             }
         }
 
-        holder.itemView.setOnClickListener {
-            listener.onItemClick()
-        }
+//        holder.ite.setOnClickListener {
+//            listener.onItemClick()
+//        }
     }
 
     override fun getItemCount() = contentDataList.size

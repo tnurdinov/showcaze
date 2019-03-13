@@ -8,13 +8,16 @@ import com.tnurdinov.showcaze.pojos.Content
 import com.tnurdinov.showcaze.pojos.Image
 import java.util.*
 
-class SliderWidgetViewHolder(private val viewPager2: ViewPager2) : RecyclerView.ViewHolder(viewPager2) {
+class SliderWidgetViewHolder(
+    private val viewPager2: ViewPager2,
+    private val listener: OnItemClickListener
+) : RecyclerView.ViewHolder(viewPager2) {
 
     private val handler = Handler()
     lateinit var runnable: Runnable
 
     fun bind(content: Content) {
-        viewPager2.adapter = ViewPagerAdapter(content.images as ArrayList<Image>)
+        viewPager2.adapter = ViewPagerAdapter(content.images as ArrayList<Image>, listener)
 
         runnable = Runnable {
             viewPager2.currentItem = when (viewPager2.currentItem) {
