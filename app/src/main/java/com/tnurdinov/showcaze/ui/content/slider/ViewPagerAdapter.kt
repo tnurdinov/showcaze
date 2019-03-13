@@ -7,7 +7,7 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.tnurdinov.showcaze.R
-import com.tnurdinov.showcaze.pojos.Image
+import com.tnurdinov.showcaze.data.model.Image
 import com.tnurdinov.showcaze.ui.content.OnItemClickListener
 
 class ViewPagerAdapter(

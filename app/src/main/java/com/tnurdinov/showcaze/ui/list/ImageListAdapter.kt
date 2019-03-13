@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.tnurdinov.showcaze.R
-import com.tnurdinov.showcaze.pojos.Image
+import com.tnurdinov.showcaze.data.model.Image
 
 class ImageListAdapter: RecyclerView.Adapter<ListItemViewHolder>() {
     var listDataSet: List<Image> = emptyList()

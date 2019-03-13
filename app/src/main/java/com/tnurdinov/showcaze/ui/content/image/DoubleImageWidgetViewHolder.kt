@@ -5,7 +5,7 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.tnurdinov.showcaze.R
-import com.tnurdinov.showcaze.pojos.Content
+import com.tnurdinov.showcaze.data.model.Content
 import com.tnurdinov.showcaze.ui.content.OnItemClickListener
 
 class DoubleImageWidgetViewHolder (

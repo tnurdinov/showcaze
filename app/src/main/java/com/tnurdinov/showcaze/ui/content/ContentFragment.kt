@@ -12,26 +12,32 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tnurdinov.showcaze.R
-import com.tnurdinov.showcaze.pojos.Content
+import com.tnurdinov.showcaze.data.model.Content
 import com.tnurdinov.showcaze.viewmodels.ImageViewModel
+import dagger.android.support.AndroidSupportInjection
+import javax.inject.Inject
 
 
 class ContentFragment : Fragment(), OnItemClickListener {
+
+    @Inject
+    internal lateinit var viewModelFactory: ViewModelProvider.Factory
+
     private lateinit var viewAdapter: ImageContentAdapter
     private lateinit var progressView: FrameLayout
-
-    private val viewModel by lazy {
-        ViewModelProviders.of(this).get(ImageViewModel::class.java)
-    }
+    lateinit var viewModel: ImageViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        AndroidSupportInjection.inject(this)
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(ImageViewModel::class.java)
         viewAdapter = ImageContentAdapter(this)
         observeContentList()
         observeLoadingState()

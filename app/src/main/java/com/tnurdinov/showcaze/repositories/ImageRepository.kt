@@ -1,16 +1,14 @@
 package com.tnurdinov.showcaze.repositories
 
 import android.net.Uri
-import com.tnurdinov.showcaze.ContentScreenState
-import com.tnurdinov.showcaze.ImageService
-import com.tnurdinov.showcaze.ScreenState
-import com.tnurdinov.showcaze.pojos.Image
+import com.tnurdinov.showcaze.data.ContentScreenState
+import com.tnurdinov.showcaze.data.ImageService
+import com.tnurdinov.showcaze.data.ListScreenState
+import com.tnurdinov.showcaze.data.model.Image
+import javax.inject.Singleton
 
-class ImageRepository {
-
-    private val imageService by lazy {
-        ImageService.create()
-    }
+@Singleton
+class ImageRepository(private val imageService: ImageService) {
 
     suspend fun getContent(): ContentScreenState {
         return try {
@@ -31,12 +29,12 @@ class ImageRepository {
         }
     }
 
-    suspend fun getImageList(): ScreenState {
+    suspend fun getImageList(): ListScreenState {
         return try {
             val list = imageService.getList().await()
-            ScreenState.Data(list.images)
+            ListScreenState.Data(list.images)
         } catch (exception: Exception) {
-            ScreenState.Error
+            ListScreenState.Error(exception.localizedMessage)
         }
     }
 }

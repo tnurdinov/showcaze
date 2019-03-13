@@ -5,7 +5,7 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.tnurdinov.showcaze.R
-import com.tnurdinov.showcaze.pojos.Image
+import com.tnurdinov.showcaze.data.model.Image
 
 class ListItemViewHolder(viewGroup: ViewGroup) : RecyclerView.ViewHolder(viewGroup) {
     var imageView: AppCompatImageView = itemView.findViewById(R.id.listImageView)

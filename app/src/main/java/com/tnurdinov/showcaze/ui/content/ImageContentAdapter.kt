@@ -6,7 +6,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.tnurdinov.showcaze.R
-import com.tnurdinov.showcaze.pojos.Content
+import com.tnurdinov.showcaze.data.model.Content
 import com.tnurdinov.showcaze.ui.content.carousel.CarouselImageWidgetViewHolder
 import com.tnurdinov.showcaze.ui.content.image.DoubleImageWidgetViewHolder
 import com.tnurdinov.showcaze.ui.content.image.SingleImageWidgetViewHolder

@@ -3,7 +3,7 @@ package com.tnurdinov.showcaze.ui.content
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.tnurdinov.showcaze.pojos.Content
+import com.tnurdinov.showcaze.data.model.Content
 
 class SampleViewHolder(var viewGroup: ViewGroup) : RecyclerView.ViewHolder(viewGroup) {
     var textView: TextView = TextView(itemView.context)

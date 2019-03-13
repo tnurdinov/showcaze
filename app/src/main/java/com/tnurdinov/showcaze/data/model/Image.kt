@@ -1,4 +1,4 @@
-package com.tnurdinov.showcaze.pojos
+package com.tnurdinov.showcaze.data.model
 
 import com.squareup.moshi.JsonClass
 

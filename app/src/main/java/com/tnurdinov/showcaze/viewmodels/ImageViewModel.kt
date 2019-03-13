@@ -3,15 +3,17 @@ package com.tnurdinov.showcaze.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.tnurdinov.showcaze.ContentScreenState
-import com.tnurdinov.showcaze.ScreenState
-import com.tnurdinov.showcaze.pojos.Content
-import com.tnurdinov.showcaze.pojos.Image
+import com.tnurdinov.showcaze.data.ContentScreenState
+import com.tnurdinov.showcaze.data.ImageService
+import com.tnurdinov.showcaze.data.ListScreenState
+import com.tnurdinov.showcaze.data.model.Content
+import com.tnurdinov.showcaze.data.model.Image
 import com.tnurdinov.showcaze.repositories.ImageRepository
 import kotlinx.coroutines.*
+import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
-class ImageViewModel: ViewModel(), CoroutineScope {
+class ImageViewModel @Inject constructor(service: ImageService) : ViewModel(), CoroutineScope {
     private val job = SupervisorJob()
     override val coroutineContext: CoroutineContext
         get() = job + Dispatchers.Main
@@ -21,9 +23,7 @@ class ImageViewModel: ViewModel(), CoroutineScope {
     private val errorMessage: MutableLiveData<String> = MutableLiveData()
     private val loading: MutableLiveData<Boolean> = MutableLiveData()
 
-    private val repository by lazy {
-        ImageRepository()
-    }
+    private val repository: ImageRepository = ImageRepository(service)
 
     init {
         loading.postValue(false)
@@ -63,12 +63,12 @@ class ImageViewModel: ViewModel(), CoroutineScope {
             repository.getImageList()
         }
         when (result) {
-            is ScreenState.Data -> {
-                imageList.postValue(result.someData as List<Image>?)
+            is ListScreenState.Data -> {
+                imageList.postValue(result.imageList)
                 loading.postValue(false)
             }
-            is ScreenState.Error -> {
-                errorMessage.postValue("Some message")
+            is ListScreenState.Error -> {
+                errorMessage.postValue(result.error)
                 loading.postValue(false)
             }
         }
@@ -91,8 +91,8 @@ class ImageViewModel: ViewModel(), CoroutineScope {
     }
 
     override fun onCleared() {
-        super.onCleared()
         coroutineContext.cancelChildren()
+        super.onCleared()
     }
 
 }

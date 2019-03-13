@@ -1,6 +1,6 @@
-package com.tnurdinov.showcaze
+package com.tnurdinov.showcaze.data
 
-import com.tnurdinov.showcaze.pojos.Content
+import com.tnurdinov.showcaze.data.model.Content
 
 sealed class ContentScreenState {
     data class Error(val error: String) : ContentScreenState()

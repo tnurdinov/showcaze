@@ -4,8 +4,8 @@ import android.annotation.SuppressLint
 import android.os.Handler
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
-import com.tnurdinov.showcaze.pojos.Content
-import com.tnurdinov.showcaze.pojos.Image
+import com.tnurdinov.showcaze.data.model.Content
+import com.tnurdinov.showcaze.data.model.Image
 import com.tnurdinov.showcaze.ui.content.OnItemClickListener
 import java.util.*
 

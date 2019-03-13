@@ -3,7 +3,7 @@ package com.tnurdinov.showcaze.ui.content.carousel
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.tnurdinov.showcaze.pojos.Content
+import com.tnurdinov.showcaze.data.model.Content
 import com.tnurdinov.showcaze.ui.content.OnItemClickListener
 
 class CarouselImageWidgetViewHolder(

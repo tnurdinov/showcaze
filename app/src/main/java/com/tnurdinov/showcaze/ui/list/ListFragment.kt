@@ -9,24 +9,31 @@ import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tnurdinov.showcaze.R
-import com.tnurdinov.showcaze.pojos.Image
+import com.tnurdinov.showcaze.data.model.Image
 import com.tnurdinov.showcaze.viewmodels.ImageViewModel
+import dagger.android.support.AndroidSupportInjection
+import javax.inject.Inject
 
 class ListFragment : Fragment() {
+
+    @Inject
+    internal lateinit var viewModelFactory: ViewModelProvider.Factory
+
     private lateinit var viewAdapter: ImageListAdapter
     private lateinit var viewManager: RecyclerView.LayoutManager
     private lateinit var progressView: FrameLayout
-
-    private val viewModel by lazy {
-        ViewModelProviders.of(this).get(ImageViewModel::class.java)
-    }
+    private lateinit var viewModel: ImageViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        AndroidSupportInjection.inject(this)
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(ImageViewModel::class.java)
+
         viewManager = GridLayoutManager(activity, 2)
         viewAdapter = ImageListAdapter()
         observeImageList()
