@@ -1,42 +1,40 @@
 package com.tnurdinov.showcaze.ui.content
 
+import android.annotation.SuppressLint
 import android.os.Handler
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.tnurdinov.showcaze.pojos.Content
+import com.tnurdinov.showcaze.pojos.Image
 import java.util.*
 
-class SliderWidgetViewHolder(private val viewGroup: ViewPager2) : RecyclerView.ViewHolder(viewGroup) {
+class SliderWidgetViewHolder(private val viewPager2: ViewPager2) : RecyclerView.ViewHolder(viewPager2) {
+
+    private val handler = Handler()
+    lateinit var runnable: Runnable
 
     fun bind(content: Content) {
-        viewGroup.adapter = ViewPagerAdapter(ArrayList(content.images))
-        viewGroup.currentItem = 1
-        val timer = Timer()
+        viewPager2.adapter = ViewPagerAdapter(content.images as ArrayList<Image>)
 
-//        viewGroup.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-//            override fun onPageScrollStateChanged(state: Int) {
-//                super.onPageScrollStateChanged(state)
-//            }
-//
-//            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
-//                timer.cancel()
-//            }
-//
-//            override fun onPageSelected(position: Int) {
-//                super.onPageSelected(position)
-//            }
-//        })
-
-
-        val handler = Handler()
-        val runnable = Runnable {
-            viewGroup.currentItem += 1
+        runnable = Runnable {
+            viewPager2.currentItem = when (viewPager2.currentItem) {
+                (content.images as ArrayList<Image>).lastIndex -> 0
+                else -> viewPager2.currentItem + 1
+            }
         }
 
-        timer.scheduleAtFixedRate(object : TimerTask() {
-            override fun run() {
-                handler.post(runnable)
+        handler.postDelayed(runnable, 3000)
+
+        viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            @SuppressLint("SwitchIntDef")
+            override fun onPageScrollStateChanged(state: Int) {
+                when (state) {
+                    ViewPager2.SCROLL_STATE_DRAGGING,
+                    ViewPager2.SCROLL_STATE_SETTLING -> handler.removeCallbacks(runnable)
+                    ViewPager2.SCROLL_STATE_IDLE -> handler.postDelayed(runnable, 3000)
+                }
             }
-        }, 0, 3000)
+        })
+
     }
 }

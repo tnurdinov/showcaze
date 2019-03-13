@@ -17,8 +17,9 @@ class ViewPagerAdapter(private val images: ArrayList<Image>) : RecyclerView.Adap
     override fun getItemCount(): Int = images.size
 
     override fun onBindViewHolder(holder: PagerVH, position: Int) = holder.itemView.run {
-        val imageView = findViewById<AppCompatImageView>(R.id.carouselImageView)
-        Picasso.get().load(images[position].url).into(imageView)
+        findViewById<AppCompatImageView>(R.id.carouselImageView).let { imageView ->
+            Picasso.get().load(images[position].url).into(imageView)
+        }
     }
 }
 
