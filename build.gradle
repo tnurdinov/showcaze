@@ -26,6 +26,13 @@ buildscript {
         coroutines_version = '1.1.1'
 
         navigation_version = '1.0.0-rc02'
+
+        mockito_version = '2.19.0'
+        core_test_version = '1.1.1'
+        dagger_version = '2.21'
+        leakcanary_version = '1.6.3'
+        viewpager2_version = '1.0.0-alpha02'
+        picasso_version = '2.71828'
     }
     repositories {
         google()
